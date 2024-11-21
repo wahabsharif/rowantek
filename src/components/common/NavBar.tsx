@@ -45,7 +45,7 @@ const NavBar: React.FC = () => {
         isClient ? "md:flex" : "hidden"
       } justify-between items-center py-1 px-5 transition-all duration-300 ${
         scrolling ? "w-[98%] rounded-3xl" : "w-full rounded-lg"
-      } backdrop-blur-md mx-auto bg-white/70 dark:bg-gray-950 text-gray-900 dark:text-white drop-shadow-md sticky top-2 z-50`}
+      } backdrop-blur-md hidden md:flex mx-auto bg-white/70 dark:bg-gray-950 text-gray-900 dark:text-white drop-shadow-md sticky top-2 z-50`}
     >
       {/* Left Side: Logo and Menu Items */}
       <div className="flex items-center space-x-8">

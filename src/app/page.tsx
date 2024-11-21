@@ -1,3 +1,4 @@
+import HomeBanner from "@/components/home/HomeBanner";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -5,5 +6,9 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <></>;
+  return (
+    <>
+      <HomeBanner />
+    </>
+  );
 }
