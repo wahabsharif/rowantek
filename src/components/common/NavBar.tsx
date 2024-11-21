@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react"; // Import useEffect
+import React, { useState, useEffect } from "react";
 import { navBarData } from "@/data/navBarData";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,24 +11,22 @@ import Link from "next/link";
 const NavBar: React.FC = () => {
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
-  const [isClient, setIsClient] = useState(false); // New state to track client-side rendering
-  const [scrolling, setScrolling] = useState(false); // Track scroll position
+  const [isClient, setIsClient] = useState(false);
+  const [scrolling, setScrolling] = useState(false);
 
   useEffect(() => {
-    setIsClient(true); // Set to true after the component mounts
+    setIsClient(true);
 
     const handleScroll = () => {
       if (window.scrollY > 50) {
-        setScrolling(true); // Change the state if the scroll is past 50px
+        setScrolling(true);
       } else {
-        setScrolling(false); // Reset if the scroll is back to top
+        setScrolling(false);
       }
     };
 
-    // Listen to the scroll event
     window.addEventListener("scroll", handleScroll);
 
-    // Cleanup the event listener on unmount
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -43,13 +41,12 @@ const NavBar: React.FC = () => {
     <nav
       className={`${
         isClient ? "md:flex" : "hidden"
-      } justify-between items-center py-1 px-5 transition-all duration-300 ${
-        scrolling ? "w-[98%] rounded-3xl" : "w-full rounded-lg"
-      } backdrop-blur-md hidden md:flex mx-auto bg-white/70 dark:bg-gray-950 text-gray-900 dark:text-white drop-shadow-md sticky top-2 z-50`}
+      } justify-between items-center py-1 px-5 transition-all duration-500 ease-in-out ${
+        scrolling ? "w-[90%] rounded-full" : "w-full rounded-lg"
+      } backdrop-blur-md hidden md:flex mx-auto bg-white/70 dark:bg-gray-950 text-gray-900 dark:text-white drop-shadow-md fixed top-2 left-1/2 transform -translate-x-1/2 z-50 max-w-screen-xl`}
     >
       {/* Left Side: Logo and Menu Items */}
       <div className="flex items-center space-x-8">
-        {/* Logo */}
         <div className="navbar-left">
           <div className="hidden dark:block">
             <Image src={LogoDark} alt="Logo Dark" className="w-24" />
@@ -59,7 +56,6 @@ const NavBar: React.FC = () => {
           </div>
         </div>
 
-        {/* Menu Items */}
         <div className="relative flex space-x-6">
           {navBarData.map((item) => (
             <div
@@ -81,7 +77,6 @@ const NavBar: React.FC = () => {
                 {item.label}
               </Link>
 
-              {/* Animated Underline */}
               {hoveredItem === item.id && (
                 <motion.div
                   layoutId="underline"
@@ -102,7 +97,7 @@ const NavBar: React.FC = () => {
                       exit="hidden"
                       variants={dropdownVariants}
                       transition={{ duration: 0.2 }}
-                      className="absolute left-0 mt-2 w-80 backdrop-blur-md bg-white/70 dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-300 drop-shadow-md rounded-md p-2 space-y-4"
+                      className="absolute left-0 mt-2 w-80 backdrop-blur-md bg-white/70 dark:bg-gray-950 text-gray-900 dark:text-white drop-shadow-md rounded-md p-2 space-y-4"
                     >
                       {item.children.map((child) => (
                         <Link
