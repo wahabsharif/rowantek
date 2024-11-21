@@ -27,7 +27,7 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-xl focus:outline-none bg-gray-200 dark:bg-gray-700"
+      className="p-1 rounded-lg focus:outline-none bg-gray-200 dark:bg-gray-700 md:p-2 lg:p-3"
     >
       {theme === "light" ? <LuSunMedium size={24} /> : <FaMoon size={24} />}
     </button>
