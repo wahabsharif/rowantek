@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // Import useEffect
 import { navBarData } from "@/data/navBarData";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,6 +11,28 @@ import Link from "next/link";
 const NavBar: React.FC = () => {
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  const [isClient, setIsClient] = useState(false); // New state to track client-side rendering
+  const [scrolling, setScrolling] = useState(false); // Track scroll position
+
+  useEffect(() => {
+    setIsClient(true); // Set to true after the component mounts
+
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolling(true); // Change the state if the scroll is past 50px
+      } else {
+        setScrolling(false); // Reset if the scroll is back to top
+      }
+    };
+
+    // Listen to the scroll event
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup the event listener on unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const dropdownVariants = {
     hidden: { opacity: 0, y: -10 },
@@ -18,7 +40,13 @@ const NavBar: React.FC = () => {
   };
 
   return (
-    <nav className="hidden md:flex justify-between items-center py-1 px-5 rounded-xl backdrop-blur-md bg-white/70 dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-300 drop-shadow-md">
+    <nav
+      className={`${
+        isClient ? "md:flex" : "hidden"
+      } justify-between items-center py-1 px-5 transition-all duration-300 ${
+        scrolling ? "w-[98%] rounded-3xl" : "w-full rounded-lg"
+      } backdrop-blur-md mx-auto bg-white/70 dark:bg-gray-950 text-gray-900 dark:text-white drop-shadow-md sticky top-2 z-50`}
+    >
       {/* Left Side: Logo and Menu Items */}
       <div className="flex items-center space-x-8">
         {/* Logo */}
