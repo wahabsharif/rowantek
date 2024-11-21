@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
 import NavBar from "@/components/common/NavBar";
+import MobileNavBar from "@/components/common/MobileNavBar";
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 export const metadata: Metadata = {
-  viewport: "width=device-width, initial-scale=1",
   description:
     "Rowantek (RT): Tech startup specializing in real-time, connected embedded systems and addon hardware for sensor data, processing, control, and cloud storage.",
   keywords: [
@@ -130,6 +135,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <NavBar />
+        <MobileNavBar />
         {children}
       </body>
     </html>
